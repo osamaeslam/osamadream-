@@ -237,10 +237,10 @@ export const ItemSalesCustomerDrawer: React.FC<ItemSalesCustomerDrawerProps> = (
                         )}
                       </td>
                       <td className="px-2.5 py-2 text-center">
-                        {onOpenNewOrder ? (
+                        {onOpenNewOrder && master ? (
                           <button
                             type="button"
-                            onClick={() => onOpenNewOrder(master || ({} as Customer), item.itemCode || undefined)}
+                            onClick={() => onOpenNewOrder(master, item.itemCode || undefined)}
                             className="rounded-lg bg-amber-100 p-1.5 text-amber-800 transition hover:bg-amber-200"
                             aria-label={`طلب ${item.itemName}`}
                           >
@@ -309,10 +309,10 @@ export const ItemSalesCustomerDrawer: React.FC<ItemSalesCustomerDrawerProps> = (
                         {opportunity.type === 'stopped' ? 'لم يشترِه في الفترة الحالية' : 'انخفضت الكمية'} • السابق {formatNumber(opportunity.item.previousQuantity)} / الحالي {formatNumber(opportunity.currentQuantity)}
                       </div>
                     </div>
-                    {onOpenNewOrder ? (
+                    {onOpenNewOrder && master ? (
                       <button
                         type="button"
-                        onClick={() => onOpenNewOrder(master || ({} as Customer), opportunity.item.itemCode || undefined)}
+                        onClick={() => onOpenNewOrder(master, opportunity.item.itemCode || undefined)}
                         className="shrink-0 rounded-lg bg-amber-500 px-2 py-1 text-[9px] font-black text-white hover:bg-amber-400"
                       >
                         طلب
@@ -329,10 +329,10 @@ export const ItemSalesCustomerDrawer: React.FC<ItemSalesCustomerDrawerProps> = (
               الأرقام محسوبة من صفوف مبيعات الأصناف الحالية فقط، دون إعادة حساب أي مبلغ أو ضريبة.
             </p>
             <div className="flex items-center gap-2">
-              {onOpenNewOrder ? (
+              {onOpenNewOrder && master ? (
                 <button
                   type="button"
-                  onClick={() => onOpenNewOrder(master || ({} as Customer))}
+                  onClick={() => onOpenNewOrder(master)}
                   className="inline-flex items-center gap-1.5 rounded-xl bg-[#0f2b38] px-3 py-2 text-[10px] font-black text-white hover:bg-[#163b4d]"
                 >
                   <ShoppingCart className="h-3.5 w-3.5" />
