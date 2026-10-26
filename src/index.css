@@ -1499,3 +1499,40 @@ main .border-slate-200 { border-color: var(--app-line) !important; }
   background: #e6f7f5; color: #046b62; font-size: 10px; font-weight: 900;
 }
 .cf-switch.on .cf-switch-count { background: #fff; }
+
+/* --- شاشة تحليل مبيعات الأصناف --- */
+/* The global touch rule forces 44px min-height on every button; inside dense
+   analytical tables and pagination we size controls explicitly instead. */
+.item-sales-screen button,
+.item-sales-screen select,
+.item-sales-screen input {
+  min-height: 0;
+}
+.item-sales-screen button {
+  line-height: 1.2;
+}
+.item-sales-screen table th,
+.item-sales-screen table td {
+  vertical-align: middle;
+}
+.item-sales-screen ::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.item-sales-screen ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+.item-sales-screen ::-webkit-scrollbar-track {
+  background: transparent;
+}
+@keyframes is-drawer-in {
+  from { transform: translateX(100%); opacity: .7; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.is-drawer-in {
+  animation: is-drawer-in .22s ease-out;
+}
+@media (max-width: 640px) {
+  .is-drawer-in { animation-duration: .18s; }
+}

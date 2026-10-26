@@ -640,7 +640,9 @@ export function aggregateCustomerItemSales(sales: CustomerItemSaleRecord[]): Cus
 
   map.forEach((summary, key) => {
     summary.distinctItemsCount = summary.items.length;
-    summary.distinctOrdersCount = ordersByCustomer.get(key)?.size || Math.max(1, Math.ceil(summary.items.length / 3));
+    // Never invent an order count. When the sheet has no sales-order column,
+    // the truthful value is 0 and the UI shows "—" instead of a guess.
+    summary.distinctOrdersCount = ordersByCustomer.get(key)?.size || 0;
     // Sort items by total amount descending
     summary.items.sort((a, b) => b.totalAmount - a.totalAmount);
   });
@@ -734,12 +736,14 @@ export function getSavedCustomerItemSales(): CustomerItemSaleRecord[] {
 /**
  * Save Customer Item Sales to storage
  */
-export function saveCustomerItemSales(sales: CustomerItemSaleRecord[]): void {
-  if (typeof window === 'undefined') return;
+export function saveCustomerItemSales(sales: CustomerItemSaleRecord[]): boolean {
+  if (typeof window === 'undefined') return false;
   try {
     window.localStorage.setItem(ITEM_SALES_STORAGE_KEY, JSON.stringify(sales));
+    return true;
   } catch (err) {
     console.warn('Customer item sales storage note:', err);
+    return false;
   }
 }
 
